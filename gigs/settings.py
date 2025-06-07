@@ -40,11 +40,21 @@ INSTALLED_APPS = [
         'users',
     'marketplace',
     'rest_framework',
+     'drf_yasg',
+       "corsheaders",
+     'rest_framework.authtoken',  # Pour l’authentification par token
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:3000",
+    "http://127.0.0.1:9000",
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+      "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -53,7 +63,15 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'gigs.urls'
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+     #   'rest_framework.authentication.SessionAuthentication',  # Optionnel, si vous utilisez sessions
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -126,3 +144,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
