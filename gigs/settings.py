@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
      'drf_yasg',
        "corsheaders",
+       
      'rest_framework.authtoken',  # Pour l’authentification par token
 ]
 
@@ -63,16 +64,16 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'gigs.urls'
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-     #   'rest_framework.authentication.SessionAuthentication',  # Optionnel, si vous utilisez sessions
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
-}
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        # vous pouvez ajouter d’autres si besoin
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',  # ou IsAuthenticated selon besoin
+    ),
+}
 AUTH_USER_MODEL = 'users.User'
 
 TEMPLATES = [
